@@ -1,0 +1,11 @@
+{
+    "templatedir": "extension", 
+    "name": "host_file_switcher", 
+    "license": "MPL 1.1/GPL 2.0/LGPL 2.1", 
+    "author": "Anthony Petty[anthony@anthonypetty.com]", 
+    "id": "jid0-WgoiC7ooIviowYVA4DUnwzlf994", 
+    "version": "0.1", 
+    "fullName": "Host File Switcher", 
+    "harnessClassID": "21471806-c6ea-427f-961c-148d58dc8055", 
+    "description": "A simple utility to easily let you change host files from within firefox."
+}

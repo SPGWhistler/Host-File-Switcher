@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<overlay id="menu" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+<!--
+	<script src="hostfilehelper.js"/>
+	<script src="dnshandler.js"/>
+	<script src="fileshandler.js"/>
+	<script src="guihandler.js"/>
+	<script src="io.js"/>
+-->
+	<menubar id="main-menubar">
+		<menu id="hostfilehelper-menu" label="Host Files" accesskey="o" onpopupshowing="hostFileHelper.getCurrentHostFile();">
+			<menupopup id="hostfilehelper-menu-popup1">
+				<menuseparator/>
+				<menuitem id="newhostfile" label="New Host File" accesskey="N"/>
+				<menu label="Manage Host Files" accesskey="E">
+					<menupopup id="hostfilehelper-menu-popup2">
+					</menupopup>
+				</menu>
+			</menupopup>
+		</menu>
+	</menubar>
+</overlay>

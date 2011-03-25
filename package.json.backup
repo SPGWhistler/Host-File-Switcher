@@ -1,0 +1,10 @@
+{
+    "templatedir": "extension", 
+    "name": "host_file_switcher", 
+    "license": "MPL 1.1/GPL 2.0/LGPL 2.1", 
+    "author": "", 
+    "version": "0.1", 
+    "fullName": "host_file_switcher", 
+    "harnessClassID": "21471806-c6ea-427f-961c-148d58dc8055", 
+    "description": "a basic add-on"
+}
