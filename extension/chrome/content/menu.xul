@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <overlay id="menu" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
+	<script src="xul.js"/>
 <!--
 	<script src="hostfilehelper.js"/>
 	<script src="dnshandler.js"/>

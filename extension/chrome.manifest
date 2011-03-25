@@ -8,5 +8,6 @@ category profile-after-change host_file_switcher-harness @mozilla.org/harness-se
 # was loaded for this extension.
 resource host_file_switcher-res modules/
 
+# This adds a menu to firefox
 content     hfs    chrome/content/
 overlay chrome://browser/content/browser.xul chrome://hfs/content/menu.xul
