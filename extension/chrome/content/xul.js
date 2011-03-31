@@ -13,7 +13,8 @@ var hostFileHelper = {
 
 	popupShowing: function()
 	{
-		main.myNewFunc();
+		//main.myNewFunc();
+		main.openFile();
 		//main.main.editor.show();
 	},
 
