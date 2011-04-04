@@ -9,7 +9,7 @@
 	<script src="io.js"/>
 -->
 	<menubar id="main-menubar">
-		<menu id="hostfileswitcher-menu" label="Host Files" accesskey="o" onpopupshowing="hostFileSwitcher.popupShowing();">
+		<menu id="hostfileswitcher-menu" label="Host Files" accesskey="o" onpopupshowing="hostFileSwitcher.menuShowing();">
 			<menupopup id="hostfileswitcher-menu-popup1">
 				<menuseparator/>
 				<menuitem id="newhostfile" label="New Host File" accesskey="N"/>

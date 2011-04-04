@@ -12,11 +12,17 @@ var hostFileSwitcher = {
 		this.mainHostFilesList = document.getElementById("hostfileswitcher-menu-popup1");
 	},
 
-	popupShowing: function()
+	/**
+	 * Called when the user opens the main menu.
+	 */
+	menuShowing: function()
 	{
-		//main.myNewFunc();
-		this.updateHostFilesList(main.hostFiles);
-		//main.main.editor.show();
+		this.updateHostFilesList(main.hostFiles, main.currentHostFileNames);
+	},
+
+	hostFileClicked: function()
+	{
+		main.hostFileClicked(this.getAttribute('hostFile'));
 	},
 
 	loadSDKModule: function(module){
@@ -24,8 +30,15 @@ var hostFileSwitcher = {
 			.getService().wrappedJSObject.loader.require(module);
 	},
 
-	updateHostFilesList: function(hostFiles, currentHostFileName)
+	/**
+	 * Update the menu with the list of host files.
+	 * @param hostFiles (object)
+	 * @param currentHostFileNames (array)
+	 */
+	updateHostFilesList: function(hostFiles, currentHostFileNames)
 	{
+		//@TODO There is a bug - if you open the menu
+		//more than once, the check marks go away.
 		//Disable the menu
 		this.enableMainMenu(false);
 		//Remove any items in the main menu already
@@ -37,28 +50,28 @@ var hostFileSwitcher = {
 			var numberString;
 			//@TODO Fix the access keys
 			var j = 9;
-			
-			//Create a menu item for each host file...
+			var k;
 			for (var i in hostFiles)
 			{
-				//Generate a "numberString" to prepend to the menu item name...
 				numberString = (j > 0) ? j + '. ' : '';
-				//Create the main menu item...
 				menuitem = this.createMenuItem(numberString + i);
 				if (j > 0)
 				{
 					menuitem.setAttribute('accesskey', j);
 				}
-				menuitem.setAttribute('type', 'radio');
+				menuitem.setAttribute('type', 'check');
 				menuitem.setAttribute('name', 'hostfile');
-				//@TODO Need to make this work with multiple host files.
-				/*
-				if (typeof currentHostFileName === 'string' && currentHostFileName == i)
+				menuitem.setAttribute('hostFile', i);
+				for (k = 0; k < currentHostFileNames.length; k++)
 				{
-					menuitem.setAttribute('checked', 'true');
+					if (currentHostFileNames[k] === i)
+					{
+						menuitem.setAttribute('checked', 'true');
+						delete currentHostFileNames[k];
+						break;
+					}
 				}
-				*/
-				//menuitem.addEventListener("command", this.changeHostFileAction, false);
+				menuitem.addEventListener("command", this.hostFileClicked, false);
 				this.mainHostFilesList.insertBefore(menuitem, this.mainHostFilesList.firstChild);
 				
 				//Create the edit menu item...
