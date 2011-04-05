@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Editor</title>
 	<style>
 	body {
 		background-color: #fff;
@@ -9,7 +8,13 @@
 	</style>
 </head>
 <body>
-	<div>Edit some stuff:</div>
-	<textarea rows='10' cols='20' id='my_text_area'></textarea>
+	<div>Manage Host Files</div>
+	<select id="hfm_list">
+	</select>
+	<input type="text" id="hfm_hostfile"/>
+	<textarea rows='10' cols='20' id='hfm_data'></textarea>
+	<button type="button" id="hfm_delete">Delete</button>
+	<button type="button" id="hfm_cancel">Cancel</button>
+	<button type="button" id="hfm_save">Save</button>
 </body>
 </html>
