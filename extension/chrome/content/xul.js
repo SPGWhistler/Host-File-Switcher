@@ -5,11 +5,16 @@ window.addEventListener("load", function(){
 var main;
 
 var hostFileSwitcher = {
+	/**
+	 * Initialize the xul.
+	 * Called from the window load event listener above.
+	 */
 	init: function()
 	{
 		//Get a reference to the main module.
 		main = this.loadSDKModule("main");
 		this.mainHostFilesList = document.getElementById("hostfileswitcher-menu-popup1");
+		document.getElementById('managehostfiles').addEventListener("command", this.manageHostFilesClicked, false);
 	},
 
 	/**
@@ -20,11 +25,28 @@ var hostFileSwitcher = {
 		this.updateHostFilesList(main.hostFiles);
 	},
 
+	/**
+	 * Called when one of the host files is clicked.
+	 */
 	hostFileClicked: function()
 	{
 		main.hostFileClicked(this.getAttribute('hostFile'));
 	},
 
+	/**
+	 * Called when the manage host files item is clicked.
+	 */
+	manageHostFilesClicked: function()
+	{
+		main.manageHostFilesClicked();
+	},
+
+	/**
+	 * Load an SDK module.
+	 * Used to get a reference to the main module.
+	 * @param module (string) The module to get a reference to.
+	 * @return object
+	 */
 	loadSDKModule: function(module){
 		return Components.classes["@mozilla.org/harness-service;1?id=jid0-WgoiC7ooIviowYVA4DUnwzlf994"]
 			.getService().wrappedJSObject.loader.require(module);
@@ -65,19 +87,6 @@ var hostFileSwitcher = {
 				}
 				menuitem.addEventListener("command", this.hostFileClicked, false);
 				this.mainHostFilesList.insertBefore(menuitem, this.mainHostFilesList.firstChild);
-				
-				//Create the edit menu item...
-				/*
-				menuitem = this.createMenuItem(numberString + curHostFileName);
-				if ((i + 1) < 10)
-				{
-					menuitem.setAttribute('accesskey', (i + 1));
-				}
-				menuitem.setAttribute('filename', hostFiles[i].path);
-				menuitem.setAttribute('nameonly', curHostFileName);
-				menuitem.addEventListener("command", this.editFileAction, false);
-				this.editHostFilesList.insertBefore(menuitem, this.editHostFilesList.firstChild);
-				*/
 				j--;
 			}
 		}
@@ -85,6 +94,12 @@ var hostFileSwitcher = {
 		this.enableMainMenu(true);
 	},
 	
+	/**
+	 * Create a menu item.
+	 * Used to easily create new menu items.
+	 * @param label (string) The menu item label
+	 * @return object
+	 */
 	createMenuItem: function(label)
 	{
 		const XUL_NS = "http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul";
@@ -96,7 +111,6 @@ var hostFileSwitcher = {
 	/**
 	 * Remove all of the menu items that have a tagName of 'menuitem'
 	 * and an attribute 'name' of 'hostfile'.
-	 * //Also remove all items from the edit menu.
 	 */
 	removeMenuItems: function()
 	{
@@ -116,12 +130,6 @@ var hostFileSwitcher = {
 		{
 			this.mainHostFilesList.removeChild(tmpList[i]);
 		}
-		/*
-		//Remove any items in the edit menu already...
-		while (this.editHostFilesList.firstChild) {
-			this.editHostFilesList.removeChild(this.editHostFilesList.firstChild);
-		}
-		*/
 	},
 	
 	/**

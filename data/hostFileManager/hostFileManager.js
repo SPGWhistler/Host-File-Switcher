@@ -1,7 +1,7 @@
 var textArea = document.getElementById('my_text_area');
 
 textArea.onkeyup = function(event){
-	if (event.keyCode == 13)
+	if (event.keyCode === 13)
 	{
 		postMessage(textArea.value);
 		textArea.value = '';
