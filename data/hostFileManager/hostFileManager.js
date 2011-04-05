@@ -8,8 +8,16 @@ textArea.onkeyup = function(event){
 	}
 };
 
-self.on('message', function(){
+self.on('message', function(message){
 	var textArea = document.getElementById('my_text_area');
-	textArea.value = '';
+	var value = '';
+	if (typeof message === 'object')
+	{
+		for (var i in message)
+		{
+			value += message[i].data + "\n";
+		}
+	}
+	textArea.value = value;
 	textArea.focus();
 });
