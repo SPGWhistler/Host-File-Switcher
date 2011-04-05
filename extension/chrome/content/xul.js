@@ -17,7 +17,7 @@ var hostFileSwitcher = {
 	 */
 	menuShowing: function()
 	{
-		this.updateHostFilesList(main.hostFiles, main.currentHostFileNames);
+		this.updateHostFilesList(main.hostFiles);
 	},
 
 	hostFileClicked: function()
@@ -33,12 +33,9 @@ var hostFileSwitcher = {
 	/**
 	 * Update the menu with the list of host files.
 	 * @param hostFiles (object)
-	 * @param currentHostFileNames (array)
 	 */
-	updateHostFilesList: function(hostFiles, currentHostFileNames)
+	updateHostFilesList: function(hostFiles)
 	{
-		//@TODO There is a bug - if you open the menu
-		//more than once, the check marks go away.
 		//Disable the menu
 		this.enableMainMenu(false);
 		//Remove any items in the main menu already
@@ -62,14 +59,9 @@ var hostFileSwitcher = {
 				menuitem.setAttribute('type', 'check');
 				menuitem.setAttribute('name', 'hostfile');
 				menuitem.setAttribute('hostFile', i);
-				for (k = 0; k < currentHostFileNames.length; k++)
+				if (hostFiles[i].selected === true)
 				{
-					if (currentHostFileNames[k] === i)
-					{
-						menuitem.setAttribute('checked', 'true');
-						delete currentHostFileNames[k];
-						break;
-					}
+					menuitem.setAttribute('checked', 'true');
 				}
 				menuitem.addEventListener("command", this.hostFileClicked, false);
 				this.mainHostFilesList.insertBefore(menuitem, this.mainHostFilesList.firstChild);
