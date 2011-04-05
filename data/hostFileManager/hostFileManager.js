@@ -16,11 +16,13 @@ self.on('message', function(message){
 	{
 		var html = '';
 		hostFiles = message;
+		/*
 		$('#hfm_list').empty();
 		for (var i in hostFiles)
 		{
 			html += '<option value="' + i + '">' + i + '</option>';
 		}
 		$('#hfm_list').append(html);
+		*/
 	}
 });
