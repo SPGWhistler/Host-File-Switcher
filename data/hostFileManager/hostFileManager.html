@@ -8,15 +8,25 @@
 	</style>
 </head>
 <body>
-	<div>Manage Host Files</div>
-	<select id="hfm_list">
-	<option value="one">one</option>
-	<option value="two">two</option>
-	</select>
-	<input type="text" id="hfm_hostfile"/>
-	<textarea rows='10' cols='20' id='hfm_data'></textarea>
-	<button type="button" id="hfm_delete">Delete</button>
-	<button type="button" id="hfm_cancel">Cancel</button>
-	<button type="button" id="hfm_save">Save</button>
+	<form>
+		<div>Manage Host Files</div>
+		<div id="hfm_list_div">
+			<select id="hfm_list">
+			</select>
+		</div>
+		<!-- Bug in sdk - select wont drop down. -->
+		<!-- Bug in sdk - panel stays on all desktops. -->
+		<div id="hfm_hostfile_div">
+			<input type="text" id="hfm_hostfile"/>
+		</div>
+		<div id="hfm_data_div">
+			<textarea id='hfm_data'></textarea>
+		</div>
+		<div id="hfm_buttons_div">
+			<button type="button" id="hfm_delete">Delete</button>
+			<button type="button" id="hfm_cancel">Cancel</button>
+			<button type="button" id="hfm_save">Save</button>
+		</div>
+	</form>
 </body>
 </html>
