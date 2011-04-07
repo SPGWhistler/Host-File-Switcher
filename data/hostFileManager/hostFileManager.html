@@ -5,6 +5,16 @@
 	body {
 		background-color: #fff;
 	}
+	#hfm_list {
+		width: 750px;
+	}
+	#hfm_hostfile {
+		width: 600px;
+	}
+	#hfm_data {
+		width: 750px;
+		height: 400px;
+	}
 	</style>
 </head>
 <body>
@@ -17,7 +27,8 @@
 		<!-- Bug in sdk - select wont drop down. -->
 		<!-- Bug in sdk - panel stays on all desktops. -->
 		<div id="hfm_hostfile_div">
-			<input type="text" id="hfm_hostfile" pattern="[a-zA-Z_$][0-9a-zA-Z_$\s]*" required="required"/>
+			<label for="hfm_hostfile">Host File Name:</label>
+			<input type="text" id="hfm_hostfile" required="required"/>
 			<input type="hidden" id="hfm_original_hostfile"/>
 		</div>
 		<div id="hfm_data_div">

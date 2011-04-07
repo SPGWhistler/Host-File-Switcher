@@ -162,9 +162,9 @@ var hfm = {
 
 	validateHostFileName : function()
 	{
-		var pattern = /^[a-zA-Z_$][0-9a-zA-Z_$\s]*$/g;
+		var pattern = /^[a-zA-Z_$][0-9a-zA-Z_$\s\.]*$/g;
 		var newVal = $('#hfm_hostfile').val();
-		if (pattern.test(newVal) === true)
+		if (newVal === '' || pattern.test(newVal) === true)
 		{
 			//Valid input
 			this.previousHostFileValue = newVal;
