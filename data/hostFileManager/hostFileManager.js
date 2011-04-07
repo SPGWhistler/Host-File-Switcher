@@ -46,25 +46,30 @@ var hfm = {
 		if (typeof message === 'object')
 		{
 			//We got a list of host files, update interface
-			var list_html = '';
 			this.hostFiles = message;
-			//Clear form elements
-			$('#hfm_list').empty();
-			$('#hfm_hostfile').val('');
-			$('#hfm_original_hostfile').val('');
-			$('#hfm_data').val('');
-			//Build form data
-			var j = 0;
-			var selected = '';
-			for (var i in this.hostFiles)
-			{
-				selected = (j === 0) ? 'selected="selected"' : '';
-				list_html += '<option ' + selected + ' value="' + i + '">' + i + '</option>';
-				j++;
-			}
-			$('#hfm_list').append(list_html)
-			this.updateFormElements();
+			this.updateList();
 		}
+	},
+
+	updateList : function()
+	{
+		var list_html = '';
+		//Clear form elements
+		$('#hfm_list').empty();
+		$('#hfm_hostfile').val('');
+		$('#hfm_original_hostfile').val('');
+		$('#hfm_data').val('');
+		//Build form data
+		var j = 0;
+		var selected = '';
+		for (var i in this.hostFiles)
+		{
+			selected = (j === 0) ? 'selected="selected"' : '';
+			list_html += '<option ' + selected + ' value="' + i + '">' + i + '</option>';
+			j++;
+		}
+		$('#hfm_list').append(list_html)
+		this.updateFormElements();
 	},
 
 	/**
@@ -94,6 +99,9 @@ var hfm = {
 			$('#hfm_original_hostfile').val(newName);
 			this.hostFiles[newName] = this.hostFiles[originalName];
 			delete this.hostFiles[originalName];
+			this.updateList();
+			$('#hfm_list').val(newName);
+			$('#hfm_list').change();
 		}
 		else
 		{
@@ -126,6 +134,7 @@ var hfm = {
 		if (typeof this.hostFiles[hostFile] === 'object')
 		{
 			delete this.hostFiles[hostFile];
+			this.updateList();
 		}
 		else
 		{
