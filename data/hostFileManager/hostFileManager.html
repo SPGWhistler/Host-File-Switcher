@@ -11,13 +11,14 @@
 	<form>
 		<div>Manage Host Files</div>
 		<div id="hfm_list_div">
-			<select id="hfm_list">
+			<select id="hfm_list" size="5">
 			</select>
 		</div>
 		<!-- Bug in sdk - select wont drop down. -->
 		<!-- Bug in sdk - panel stays on all desktops. -->
 		<div id="hfm_hostfile_div">
-			<input type="text" id="hfm_hostfile"/>
+			<input type="text" id="hfm_hostfile" required="required"/>
+			<input type="hidden" id="hfm_original_hostfile"/>
 		</div>
 		<div id="hfm_data_div">
 			<textarea id='hfm_data'></textarea>

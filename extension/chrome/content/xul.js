@@ -1,9 +1,9 @@
 window.addEventListener("load", function(){
-	hostFileSwitcher.init();
+	hostFileSwitcherXul.init();
 }, false);
 
-var hostFileSwitcher = {
-	main: {},
+var hostFileSwitcherXul = {
+	hostFileSwitcher: {},
 	mainHostFilesList: {},
 
 	/**
@@ -14,7 +14,7 @@ var hostFileSwitcher = {
 	{
 		var self = this;
 		//Get a reference to the main module.
-		this.main = this.loadSDKModule("main");
+		this.hostFileSwitcher = this.loadSDKModule("main").hostFileSwitcher;
 		this.mainHostFilesList = document.getElementById("hostfileswitcher-menu-popup1");
 		//Add event handler for main host files menu
 		document.getElementById('hostfileswitcher-menu').addEventListener("popupshowing", function(){
@@ -31,7 +31,7 @@ var hostFileSwitcher = {
 	 */
 	menuShowing: function()
 	{
-		this.updateHostFilesList(this.main.getHostFiles());
+		this.updateHostFilesList(this.hostFileSwitcher.getHostFiles());
 	},
 
 	/**
@@ -40,7 +40,7 @@ var hostFileSwitcher = {
 	 */
 	hostFileClicked: function(obj)
 	{
-		this.main.hostFileClicked(obj.getAttribute('hostFile'));
+		this.hostFileSwitcher.hostFileClicked(obj.getAttribute('hostFile'));
 	},
 
 	/**
@@ -48,7 +48,7 @@ var hostFileSwitcher = {
 	 */
 	manageHostFilesClicked: function()
 	{
-		this.main.manageHostFilesClicked();
+		this.hostFileSwitcher.manageHostFilesClicked();
 	},
 
 	/**
