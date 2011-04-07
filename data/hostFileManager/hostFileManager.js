@@ -1,5 +1,6 @@
 var hfm = {
 	hostFiles : {},
+	previousHostFileValue : '',
 
 	/**
 	 * Initialize the form.
@@ -30,6 +31,10 @@ var hfm = {
 		//Add blur event handler to hostfile field
 		$('#hfm_hostfile').bind('blur', function(){
 			self.updateHostFileName();
+		});
+		//Add keypress event handler to hostfile field
+		$('#hfm_hostfile').bind('keyup', function(){
+			self.validateHostFileName();
 		});
 		//Add blur event handler to data field
 		$('#hfm_data').bind('blur', function(){
@@ -152,6 +157,29 @@ var hfm = {
 			//Invalid new name, set form value back to original
 			$('#hfm_hostfile').val(originalName);
 			//@TODO Add a nice styled error message here
+		}
+	},
+
+	validateHostFileName : function()
+	{
+		var pattern = /^[a-zA-Z_$][0-9a-zA-Z_$\s]*$/g;
+		var newVal = $('#hfm_hostfile').val();
+		if (pattern.test(newVal) === true)
+		{
+			//Valid input
+			this.previousHostFileValue = newVal;
+		}
+		else
+		{
+			//Invalid input
+			if (this.previousHostFileValue !== '')
+			{
+				$('#hfm_hostfile').val(this.previousHostFileValue);
+			}
+			else
+			{
+				$('#hfm_hostfile').val($('#hfm_original_hostfile').val());
+			}
 		}
 	},
 
