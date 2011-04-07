@@ -2,7 +2,7 @@
 <overlay id="menu" xmlns="http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul">
 	<script src="xul.js"/>
 	<menubar id="main-menubar">
-		<menu id="hostfileswitcher-menu" label="Host Files" accesskey="o" onpopupshowing="hostFileSwitcher.menuShowing();">
+		<menu id="hostfileswitcher-menu" label="Host Files" accesskey="o" >
 			<menupopup id="hostfileswitcher-menu-popup1">
 				<menuseparator/>
 				<menuitem id="managehostfiles" label="Manage Host Files" accesskey="E"/>

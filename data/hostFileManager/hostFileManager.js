@@ -9,8 +9,6 @@ var hfm = {
 		var self = this;
 		//Add change event handler to host file list
 		$('#hfm_list').change(function(){
-			//For some reason, I can't call this.updateFormElements directly.
-			//But this seems to work. Also, live and delegate dont work right.
 			self.updateFormElements();
 		});
 		//Add click and keydown event handlers to save button

@@ -2,19 +2,28 @@ window.addEventListener("load", function(){
 	hostFileSwitcher.init();
 }, false);
 
-var main;
-
 var hostFileSwitcher = {
+	main: {},
+	mainHostFilesList: {},
+
 	/**
 	 * Initialize the xul.
 	 * Called from the window load event listener above.
 	 */
 	init: function()
 	{
+		var self = this;
 		//Get a reference to the main module.
-		main = this.loadSDKModule("main");
+		this.main = this.loadSDKModule("main");
 		this.mainHostFilesList = document.getElementById("hostfileswitcher-menu-popup1");
-		document.getElementById('managehostfiles').addEventListener("command", this.manageHostFilesClicked, false);
+		//Add event handler for main host files menu
+		document.getElementById('hostfileswitcher-menu').addEventListener("popupshowing", function(){
+			self.menuShowing();
+		}, false);
+		//Add event handler for the manage host files item
+		document.getElementById('managehostfiles').addEventListener("command", function(){
+			self.manageHostFilesClicked();
+		}, false);
 	},
 
 	/**
@@ -22,15 +31,16 @@ var hostFileSwitcher = {
 	 */
 	menuShowing: function()
 	{
-		this.updateHostFilesList(main.hostFiles);
+		this.updateHostFilesList(this.main.getHostFiles());
 	},
 
 	/**
 	 * Called when one of the host files is clicked.
+	 * @param obj (object) The object the event occured on
 	 */
-	hostFileClicked: function()
+	hostFileClicked: function(obj)
 	{
-		main.hostFileClicked(this.getAttribute('hostFile'));
+		this.main.hostFileClicked(obj.getAttribute('hostFile'));
 	},
 
 	/**
@@ -38,7 +48,7 @@ var hostFileSwitcher = {
 	 */
 	manageHostFilesClicked: function()
 	{
-		main.manageHostFilesClicked();
+		this.main.manageHostFilesClicked();
 	},
 
 	/**
@@ -58,6 +68,7 @@ var hostFileSwitcher = {
 	 */
 	updateHostFilesList: function(hostFiles)
 	{
+		var self = this;
 		//Disable the menu
 		this.enableMainMenu(false);
 		//Remove any items in the main menu already
@@ -85,7 +96,9 @@ var hostFileSwitcher = {
 				{
 					menuitem.setAttribute('checked', 'true');
 				}
-				menuitem.addEventListener("command", this.hostFileClicked, false);
+				menuitem.addEventListener("command", function(){
+					self.hostFileClicked(this);
+				}, false);
 				this.mainHostFilesList.insertBefore(menuitem, this.mainHostFilesList.firstChild);
 				j--;
 			}
