@@ -97,8 +97,20 @@ var hfm = {
 		{
 			//We have a valid new name, do rename now
 			$('#hfm_original_hostfile').val(newName);
-			this.hostFiles[newName] = this.hostFiles[originalName];
-			delete this.hostFiles[originalName];
+			if (typeof this.hostFiles[originalName] === 'object')
+			{
+				this.hostFiles[newName] = this.hostFiles[originalName];
+				delete this.hostFiles[originalName];
+			}
+			else
+			{
+				//@TODO Instead, create an instance of a host file object or something like that
+				//and do the same in the main.js module.
+				this.hostFiles[newName] = {
+					'data' : '',
+					'selected' : false
+				};
+			}
 			this.updateList();
 			$('#hfm_list').val(newName);
 			$('#hfm_list').change();
