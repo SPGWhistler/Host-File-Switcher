@@ -19,6 +19,10 @@ var hfm = {
 		$('#hfm_cancel').bind('click keydown', function(){
 			self.close();
 		});
+		//Add click and keydown event handlers to delete button
+		$('#hfm_delete').bind('click keydown', function(){
+			self.deleteHostFile();
+		});
 		//Add blur event handler to hostfile field
 		$('#hfm_hostfile').bind('blur', function(){
 			self.updateHostFileName();
@@ -116,13 +120,26 @@ var hfm = {
 		}
 	},
 
+	deleteHostFile : function()
+	{
+		var hostFile = $('#hfm_hostfile').val();
+		if (typeof this.hostFiles[hostFile] === 'object')
+		{
+			delete this.hostFiles[hostFile];
+		}
+		else
+		{
+			//This shouldn't happen.
+			//It means that the value of the hfm_hostfile is not a valid entry in the hostFiles object.
+		}
+	},
+
 	/**
 	 * Save the host file data.
 	 */
 	saveData : function()
 	{
 		//@TODO Check for escape key and dont save
-		this.hostFiles['my new file'] = {'data' : 'hi ther ejim', 'selected' : false};
 		postMessage(this.hostFiles);
 	},
 
