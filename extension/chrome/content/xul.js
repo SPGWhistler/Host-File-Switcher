@@ -24,6 +24,10 @@ var hostFileSwitcherXul = {
 		document.getElementById('managehostfiles').addEventListener("command", function(){
 			self.manageHostFilesClicked();
 		}, false);
+		//Add event handler for the preferences item
+		document.getElementById('managepreferences').addEventListener("command", function(){
+			self.managePreferencesClicked();
+		}, false);
 	},
 
 	/**
@@ -49,6 +53,14 @@ var hostFileSwitcherXul = {
 	manageHostFilesClicked: function()
 	{
 		this.hostFileSwitcher.manageHostFilesClicked();
+	},
+	
+	/**
+	 * Called when the preferences item is clicked.
+	 */
+	managePreferencesClicked: function()
+	{
+		this.hostFileSwitcher.managePreferencesClicked();
 	},
 
 	/**

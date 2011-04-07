@@ -6,6 +6,7 @@
 			<menupopup id="hostfileswitcher-menu-popup1">
 				<menuseparator/>
 				<menuitem id="managehostfiles" label="Manage Host Files" accesskey="E"/>
+				<menuitem id="managepreferences" label="Preferences" accesskey="P"/>
 			</menupopup>
 		</menu>
 	</menubar>
