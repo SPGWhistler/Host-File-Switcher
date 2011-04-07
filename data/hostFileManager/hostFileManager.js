@@ -23,6 +23,10 @@ var hfm = {
 		$('#hfm_delete').bind('click keydown', function(){
 			self.deleteHostFile();
 		});
+		//Add click and keydown event handlers to new button
+		$('#hfm_new').bind('click keydown', function(){
+			self.newHostFile();
+		});
 		//Add blur event handler to hostfile field
 		$('#hfm_hostfile').bind('blur', function(){
 			self.updateHostFileName();
@@ -62,13 +66,45 @@ var hfm = {
 		//Build form data
 		var j = 0;
 		var selected = '';
+		var rename_file_exists = false;
 		for (var i in this.hostFiles)
 		{
 			selected = (j === 0) ? 'selected="selected"' : '';
 			list_html += '<option ' + selected + ' value="' + i + '">' + i + '</option>';
+			if (i === 'rename me')
+			{
+				rename_file_exists = true;
+			}
 			j++;
 		}
+		if (rename_file_exists === true)
+		{
+			//Can not create more new files because rename me exists,
+			//disable New button.
+			$('#hfm_new').attr('disabled', 'disabled');
+		}
+		else
+		{
+			//Can create new files, enable New button
+			$('#hfm_new').attr('disabled', '');
+		}
 		$('#hfm_list').append(list_html)
+		if (j === 0)
+		{
+			//No host files, disable form elements
+			$('#hfm_list').attr('disabled', 'disabled');
+			$('#hfm_hostfile').attr('disabled', 'disabled');
+			$('#hfm_data').attr('disabled', 'disabled');
+			$('#hfm_delete').attr('disabled', 'disabled');
+		}
+		else
+		{
+			//We have host files, enable the form elements
+			$('#hfm_list').attr('disabled', '');
+			$('#hfm_hostfile').attr('disabled', '');
+			$('#hfm_data').attr('disabled', '');
+			$('#hfm_delete').attr('disabled', '');
+		}
 		this.updateFormElements();
 	},
 
@@ -99,21 +135,17 @@ var hfm = {
 			$('#hfm_original_hostfile').val(newName);
 			if (typeof this.hostFiles[originalName] === 'object')
 			{
+				//Rename an existing host file
 				this.hostFiles[newName] = this.hostFiles[originalName];
 				delete this.hostFiles[originalName];
+				this.updateList();
+				$('#hfm_list').val(newName);
+				$('#hfm_list').change();
 			}
 			else
 			{
-				//@TODO Instead, create an instance of a host file object or something like that
-				//and do the same in the main.js module.
-				this.hostFiles[newName] = {
-					'data' : '',
-					'selected' : false
-				};
+				//This shouldn't happen.
 			}
-			this.updateList();
-			$('#hfm_list').val(newName);
-			$('#hfm_list').change();
 		}
 		else
 		{
@@ -137,6 +169,30 @@ var hfm = {
 		{
 			//This shouldn't happen.
 			//It means that the value of the hfm_hostfile is not a valid entry in the hostFiles object.
+		}
+	},
+
+	newHostFile : function()
+	{
+		var newName = 'rename me';
+		if (typeof this.hostFiles[newName] !== 'object')
+		{
+			//Create new host file
+			//@TODO Instead, create an instance of a host file object or something like that
+			//and do the same in the main.js module.
+			this.hostFiles[newName] = {
+				'data' : '',
+				'selected' : false
+			};
+			this.updateList();
+			$('#hfm_list').val(newName);
+			$('#hfm_list').change();
+			$('#hfm_hostfile').select();
+		}
+		else
+		{
+			//Can not create new host file because they didn't rename the first one
+			//This shouldn't happen.
 		}
 	},
 
