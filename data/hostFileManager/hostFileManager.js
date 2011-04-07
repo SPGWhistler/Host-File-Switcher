@@ -13,12 +13,12 @@ var hfm = {
 			//But this seems to work. Also, live and delegate dont work right.
 			self.updateFormElements();
 		});
-		//Add click and keydown event handlers to save button (called at most once each)
-		$('#hfm_save').one('click keydown', function(){
+		//Add click and keydown event handlers to save button
+		$('#hfm_save').bind('click keydown', function(){
 			self.saveData();
 		});
-		//Add click and keydown event handlers to cancel button (called at most once each)
-		$('#hfm_cancel').one('click keydown', function(){
+		//Add click and keydown event handlers to cancel button
+		$('#hfm_cancel').bind('click keydown', function(){
 			self.close();
 		});
 		//Got message from mother ship, handle it here
