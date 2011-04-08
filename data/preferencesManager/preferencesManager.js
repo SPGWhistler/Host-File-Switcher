@@ -7,14 +7,6 @@ var prefs = {
 	init : function()
 	{
 		var self = this;
-		/*
-		//@TODO Validate path to system host file at some point
-		//Add blur event handler to hostfile field
-		$('#prefs_hostfile').bind('blur', function(){
-			self.updateHostFileName();
-		});
-		*/
-		//@TODO Add handlers for each piece of data change to update this.myPrefs
 		//Add blur event handler to systemhostfilepath field
 		$('#prefs_systemhostfilepath').bind('blur', function(){
 			self.updateSystemHostFilePath();
