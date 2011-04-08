@@ -10,17 +10,29 @@ var prefs = {
 		/*
 		//@TODO Validate path to system host file at some point
 		//Add blur event handler to hostfile field
-		$('#hfm_hostfile').bind('blur', function(){
+		$('#prefs_hostfile').bind('blur', function(){
 			self.updateHostFileName();
 		});
 		*/
 		//@TODO Add handlers for each piece of data change to update this.myPrefs
+		//Add blur event handler to systemhostfilepath field
+		$('#prefs_systemhostfilepath').bind('blur', function(){
+			self.updateSystemHostFilePath();
+		});
+		//Add click and keydown event handlers to refreshtab field
+		$('#prefs_refreshtab').bind('click keydown', function(){
+			self.updateRefreshTab();
+		});
+		//Add blur event handler to basehostfile field
+		$('#prefs_basehostfile').bind('blur', function(){
+			self.updateBaseHostFile();
+		});
 		//Add click and keydown event handlers to save button
-		$('#hfm_save').bind('click keydown', function(){
+		$('#prefs_save').bind('click keydown', function(){
 			self.saveData();
 		});
 		//Add click and keydown event handlers to cancel button
-		$('#hfm_cancel').bind('click keydown', function(){
+		$('#prefs_cancel').bind('click keydown', function(){
 			self.close();
 		});
 		//Got message from mother ship, handle it here
@@ -56,6 +68,25 @@ var prefs = {
 			$('#prefs_refreshtab').attr('checked', '');
 		}
 		$('#prefs_basehostfile').val(this.myPrefs.baseHostFile);
+	},
+
+	updateSystemHostFilePath : function()
+	{
+		//@TODO Validate this path some how
+		var newPath = $('#prefs_systemhostfilepath').val();
+		this.myPrefs.systemHostFilePath = newPath;
+	},
+
+	updateRefreshTab : function()
+	{
+		var refresh = $('#prefs_refreshtab').attr('checked');
+		this.myPrefs.refreshTab = refresh;
+	},
+
+	updateBaseHostFile : function()
+	{
+		var baseHostFile = $('#prefs_basehostfile').val();
+		this.myPrefs.baseHostFile = baseHostFile;
 	},
 
 	saveData : function()
