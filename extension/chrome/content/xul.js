@@ -88,23 +88,31 @@ var hostFileSwitcherXul = {
 		//Create new menu items
 		if (typeof hostFiles === 'object')
 		{
-			var menuitem;
-			var numberString;
-			//@TODO Fix the access keys
-			var j = 9;
-			var k;
+			//Create a sorted array so we can display entries in order
+			var sortable = [];
 			for (var i in hostFiles)
 			{
+				sortable.push([i]);
+			}
+			sortable.sort().reverse();
+			var menuitem;
+			var numberString;
+			var j = sortable.length;
+			var k;
+			var hostFile;
+			for (i in sortable)
+			{
+				hostFile = sortable[i][0];
 				numberString = (j > 0) ? j + '. ' : '';
-				menuitem = this.createMenuItem(numberString + i);
+				menuitem = this.createMenuItem(numberString + hostFile);
 				if (j > 0)
 				{
 					menuitem.setAttribute('accesskey', j);
 				}
 				menuitem.setAttribute('type', 'check');
 				menuitem.setAttribute('name', 'hostfile');
-				menuitem.setAttribute('hostFile', i);
-				if (hostFiles[i].selected === true)
+				menuitem.setAttribute('hostFile', hostFile);
+				if (hostFiles[hostFile].selected === true)
 				{
 					menuitem.setAttribute('checked', 'true');
 				}
