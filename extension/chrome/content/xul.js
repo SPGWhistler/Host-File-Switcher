@@ -92,7 +92,7 @@ var hostFileSwitcherXul = {
 			var sortable = [];
 			for (var i in hostFiles)
 			{
-				sortable.push([i]);
+				sortable.push([i.toLowerCase(), i]);
 			}
 			sortable.sort().reverse();
 			var menuitem;
@@ -102,7 +102,7 @@ var hostFileSwitcherXul = {
 			var hostFile;
 			for (i in sortable)
 			{
-				hostFile = sortable[i][0];
+				hostFile = sortable[i][1];
 				numberString = (j > 0) ? j + '. ' : '';
 				menuitem = this.createMenuItem(numberString + hostFile);
 				if (j > 0)

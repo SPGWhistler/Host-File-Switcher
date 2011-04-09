@@ -72,11 +72,20 @@ var hfm = {
 		var j = 0;
 		var selected = '';
 		var rename_file_exists = false;
+		//Create a sorted array so we can display entries in order
+		var sortable = [];
 		for (var i in this.hostFiles)
 		{
+			sortable.push([i.toLowerCase(), i]);
+		}
+		sortable.sort();
+		var hostFile;
+		for (i in sortable)
+		{
+			hostFile = sortable[i][1];
 			selected = (j === 0) ? 'selected="selected"' : '';
-			list_html += '<option ' + selected + ' value="' + i + '">' + i + '</option>';
-			if (i === 'rename me')
+			list_html += '<option ' + selected + ' value="' + hostFile + '">' + hostFile + '</option>';
+			if (hostFile === 'rename me')
 			{
 				rename_file_exists = true;
 			}
