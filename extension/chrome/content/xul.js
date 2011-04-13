@@ -35,7 +35,7 @@ var hostFileSwitcherXul = {
 	 */
 	menuShowing: function()
 	{
-		this.updateHostFilesList(this.hostFileSwitcher.getHostFiles());
+		this.updateHostFilesList(this.hostFileSwitcher.getHostFiles(), this.hostFileSwitcher.getSwitchingAllowed());
 	},
 
 	/**
@@ -77,10 +77,12 @@ var hostFileSwitcherXul = {
 	/**
 	 * Update the menu with the list of host files.
 	 * @param hostFiles (object)
+	 * @param switchingAllowed (bool)
 	 */
-	updateHostFilesList: function(hostFiles)
+	updateHostFilesList: function(hostFiles, switchingAllowed)
 	{
 		var self = this;
+		switchingAllowed = (typeof switchingAllowed === 'boolean') ? switchingAllowed : false;
 		//Disable the menu
 		this.enableMainMenu(false);
 		//Remove any items in the main menu already
@@ -112,6 +114,15 @@ var hostFileSwitcherXul = {
 				menuitem.setAttribute('type', 'check');
 				menuitem.setAttribute('name', 'hostfile');
 				menuitem.setAttribute('hostFile', hostFile);
+				//@TODO Doubt this will work because enable function below loops over everything.
+				if (switchingAllowed === false)
+				{
+					menuitem.setAttribute('disabled', true);
+				}
+				else
+				{
+					menuitem.setAttribute('disabled', false);
+				}
 				if (hostFiles[hostFile].selected === true)
 				{
 					menuitem.setAttribute('checked', 'true');
