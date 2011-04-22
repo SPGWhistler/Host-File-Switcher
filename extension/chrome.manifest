@@ -4,10 +4,6 @@ component {21471806-c6ea-427f-961c-148d58dc8055} components/harness.js
 contract @mozilla.org/harness-service;1?id=jid0-WgoiC7ooIviowYVA4DUnwzlf994 {21471806-c6ea-427f-961c-148d58dc8055}
 category profile-after-change host_file_switcher-harness @mozilla.org/harness-service;1?id=jid0-WgoiC7ooIviowYVA4DUnwzlf994
 
-# This is used in tests/test-module.js to test that chrome.manifest
-# was loaded for this extension.
-resource host_file_switcher-res modules/
-
 # This adds a menu to firefox
 content     hfs    chrome/content/
 overlay chrome://browser/content/browser.xul chrome://hfs/content/menu.xul
