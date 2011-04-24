@@ -124,7 +124,7 @@ var hostFileSwitcherXul = {
 				}
 				if (hostFiles[hostFile].selected === true)
 				{
-					menuitem.setAttribute('checked', 'true');
+					menuitem.setAttribute('checked', 'true'); //String on purpose - must be 'true' (true also works, but it is still a string)
 				}
 				menuitem.addEventListener("command", function(){
 					self.hostFileClicked(this);
