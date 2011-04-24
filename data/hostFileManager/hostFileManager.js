@@ -215,8 +215,6 @@ var hfm = {
 		if (typeof this.hostFiles[newName] !== 'object')
 		{
 			//Create new host file
-			//@TODO Instead, create an instance of a host file object or something like that
-			//and do the same in the main.js module.
 			this.hostFiles[newName] = {
 				'data' : '',
 				'selected' : false

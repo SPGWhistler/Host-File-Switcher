@@ -114,7 +114,6 @@ var hostFileSwitcherXul = {
 				menuitem.setAttribute('type', 'check');
 				menuitem.setAttribute('name', 'hostfile');
 				menuitem.setAttribute('hostFile', hostFile);
-				//@TODO Doubt this will work because enable function below loops over everything.
 				if (switchingAllowed === false)
 				{
 					menuitem.setAttribute('disabled', true);
