@@ -15,6 +15,7 @@ var hostFileSwitcherXul = {
 		var self = this;
 		//Get a reference to the main module.
 		this.hostFileSwitcher = this.loadSDKModule("main").hostFileSwitcher;
+		this.mainHostFileMenu = document.getElementById("hostfileswitcher-menu");
 		this.mainHostFilesList = document.getElementById("hostfileswitcher-menu-popup1");
 		//Add event handler for main host files menu
 		document.getElementById('hostfileswitcher-menu').addEventListener("popupshowing", function(){
@@ -28,6 +29,7 @@ var hostFileSwitcherXul = {
 		document.getElementById('managepreferences').addEventListener("command", function(){
 			self.managePreferencesClicked();
 		}, false);
+		this.updateIcon(this.hostFileSwitcher.getHostFiles());
 	},
 
 	/**
@@ -36,6 +38,7 @@ var hostFileSwitcherXul = {
 	menuShowing: function()
 	{
 		this.updateHostFilesList(this.hostFileSwitcher.getHostFiles(), this.hostFileSwitcher.getSwitchingAllowed());
+		this.updateIcon(this.hostFileSwitcher.getHostFiles());
 	},
 
 	/**
@@ -45,6 +48,7 @@ var hostFileSwitcherXul = {
 	hostFileClicked: function(obj)
 	{
 		this.hostFileSwitcher.hostFileClicked(obj.getAttribute('hostFile'));
+		this.updateIcon(this.hostFileSwitcher.getHostFiles());
 	},
 
 	/**
@@ -72,6 +76,32 @@ var hostFileSwitcherXul = {
 	loadSDKModule: function(module){
 		return Components.classes["@mozilla.org/harness-service;1?id=jid0-WgoiC7ooIviowYVA4DUnwzlf994"]
 			.getService().wrappedJSObject.loader.require(module);
+	},
+
+	/**
+	 * Update the menu icon.
+	 * Change the menu icon based on if a host file is selected or not.
+	 * @param hostFiles (object)
+	 */
+	updateIcon: function(hostFiles)
+	{
+		var selected = false;
+		for (var i in hostFiles)
+		{
+			if (hostFiles[i].selected === true)
+			{
+				selected = true;
+				break;
+			}
+		}
+		if (selected === true)
+		{
+			this.mainHostFileMenu.setAttribute('image', 'chrome://hfs/content/red.png');
+		}
+		else
+		{
+			this.mainHostFileMenu.setAttribute('image', '');
+		}
 	},
 
 	/**
