@@ -94,6 +94,8 @@ var hostFileSwitcherXul = {
 				break;
 			}
 		}
+		//@TODO Add code here so that if we are on mac, don't
+		//add the icon to the menu.
 		if (selected === true)
 		{
 			this.mainHostFileMenu.setAttribute('image', 'chrome://hfs/content/red.png');
